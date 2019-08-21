@@ -1,3 +1,30 @@
-html {
-  background-color: red;
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+
+body {
+  background-color: white;
+  height: 100%;
+  width: 100%;
+
+  #content {
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto;
+
+    h1, h2 {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 700;
+      color: #20314A;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 60px;
+      margin: 20px 20px;
+    }
+
+    h2 {
+      font-size: 16px;
+      margin: 5px 20px;
+    }
+  }
 }
