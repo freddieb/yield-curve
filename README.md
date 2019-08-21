@@ -1,4 +1,4 @@
-# yield-curve
+# yield-curve 💵
 
 Calculates the 3-5 year yield curve and displays it in a user friendly web page.
 
@@ -12,6 +12,8 @@ cp .env.example .env
 ## Running the server
 Note: Requires Node and NPM to be installed.
 ```
+npm install
+npm run sass:compile
 node index.js
 ```
 
