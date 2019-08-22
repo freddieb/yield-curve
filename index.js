@@ -2,6 +2,7 @@ const dotenv = require('dotenv')
 const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
+const dataController = require('./data/controller')
 
 // Load the configuration into process.env.<value> variables
 dotenv.config()
@@ -21,6 +22,8 @@ app.set('view engine', 'hbs')
 app.set('port', process.env.PORT)
 
 // Start the server, with it listening on the preset port
-var server = app.listen(app.get('port'), () => {
+var server = app.listen(app.get('port'), async () => {
   console.log('Foresight server listening on port: ' + server.address().port)
+
+  await dataController()
 })
