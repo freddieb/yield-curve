@@ -27,7 +27,7 @@ module.exports = async () => {
   }
 
   // Convert data to clean format
-  const formattedYields = []
+  let formattedYields = []
   const entries = jsonYieldData.feed.entry
   for (let a = 0; a < entries.length; a++) {
     const entry = entries[a]
@@ -35,7 +35,7 @@ module.exports = async () => {
     const time = moment(entry.content['m:properties']['d:NEW_DATE'], 'YYYY-MM-DD hh:mm:ss')
 
     // Temporary fix, currently request not filtering by date correctly
-    if (time.isBefore(moment().subtract(2, 'years'))) {
+    if (time.isBefore(moment().subtract(4, 'years'))) {
       continue
     }
 
