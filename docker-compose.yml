@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  redis:
+    image: redis
+    container_name: cache
+    expose:
+      - 6379
+
+  api:
+    image: index.docker.io/foresightorg/yield-curve:latest
+    restart: unless-stopped
+    links:
+      - redis
+    env_file:
+      - .env
+
+  # Watches the docker registry for updates
+  # Must run docker login initially on host machine
+  watchtower:
+    image: v2tec/watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - $HOME/.docker/config.json:/config.json
+    # Check for new images every 90 seconds
+    command: --interval 90 
