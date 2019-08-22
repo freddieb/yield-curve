@@ -1,5 +1,7 @@
 # yield-curve 💵
 
+[![Actions Status](https://github.com/freddieb/yield-curve/workflows/Publish%20Docker%20Image/badge.svg)](https://github.com/freddieb/yield-curve/actions)
+
 Calculates the 3-5 year yield curve and displays it in a user friendly web page.
 
 
