@@ -15,4 +15,4 @@ jobs:
       with:
         args: foresightorg/yield-curve
     - name: Logout
-        run: docker logout
+      run: docker logout
