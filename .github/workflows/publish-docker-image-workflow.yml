@@ -13,6 +13,6 @@ jobs:
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
-        args: foresightorg/yield-curve
+        name: foresightorg/yield-curve
     - name: Logout
       run: docker logout
