@@ -28,7 +28,8 @@
     "path": "^0.12.7",
     "redis": "^2.8.0",
     "request": "^2.88.0",
-    "request-promise": "^4.2.4"
+    "request-promise": "^4.2.4",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "node-sass": "^4.12.0"

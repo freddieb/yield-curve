@@ -1,6 +1,7 @@
 const rp = require('request-promise')
 const moment = require('moment')
 const redis = require('../config/redis')
+const logger = require('../config/logger')(__filename)
 const { xmlToJson } = require('../config/xmlParser')
 
 module.exports = async () => {
@@ -60,7 +61,7 @@ module.exports = async () => {
     redis.hmsetAsync('curve_2_10', 'data', JSON.stringify(curve_2_10))
   ])
 
-  console.log('Yield curves calculated and saved')
+  logger.info('Yield curves calculated and saved')
 }
 
 /**
