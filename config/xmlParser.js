@@ -19,6 +19,11 @@ const options = {
   tagValueProcessor : a => he.decode(a) //default is a=>a
 }
 
+/**
+ * Takes XML data and converts it to JSON
+ * @param {String} xml 
+ * @returns {Object} json object
+ */
 const xmlToJson = (xml) => {
   if (parser.validate(xml) === true) {
     return parser.parse(xml, options);

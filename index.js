@@ -7,7 +7,7 @@ const dataController = require('./data/controller')
 // Load the configuration into process.env.<value> variables
 dotenv.config()
 
-// Initialise the server
+// Initialise the server 
 var app = express()
 
 // Route to send chart data
@@ -25,5 +25,7 @@ app.set('port', process.env.PORT)
 var server = app.listen(app.get('port'), async () => {
   console.log('Foresight server listening on port: ' + server.address().port)
 
+  // Fetch the US Treasury data that will be served on the website.
+  // TODO: Server should only listen for connections once the data has been fetched
   await dataController()
 })

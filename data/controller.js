@@ -4,7 +4,7 @@ const redis = require('../config/redis')
 const { xmlToJson } = require('../config/xmlParser')
 
 module.exports = async () => {
-  // Fetch data from US Treasury API
+  // Create request options to fetch data from US Treasury API
   const yearToRequest = 2019
   const yieldApiRequestOptions = {
     uri: `${process.env.US_TREASURY_API}/DailyTreasuryYieldCurveRateData`,
@@ -12,6 +12,7 @@ module.exports = async () => {
     json: false
   }
 
+  // Fetch the data
   let yieldApiresponse
   try {
     yieldApiresponse = await rp(yieldApiRequestOptions)
@@ -19,6 +20,7 @@ module.exports = async () => {
     throw e
   }
 
+  // Parse the XML to JSON so that its easier to work with
   let jsonYieldData
   try {
     jsonYieldData = xmlToJson(yieldApiresponse)
@@ -32,9 +34,11 @@ module.exports = async () => {
   for (let a = 0; a < entries.length; a++) {
     const entry = entries[a]
 
+    // Convert the time in String format to a Moment object
     const time = moment(entry.content['m:properties']['d:NEW_DATE'], 'YYYY-MM-DD hh:mm:ss')
 
-    // Temporary fix, currently request not filtering by date correctly
+    // Temporary fix, currently the API request is not filtering by date correctly
+    // Remove all data points before 4 years ago
     if (time.isBefore(moment().subtract(4, 'years'))) {
       continue
     }
@@ -59,6 +63,11 @@ module.exports = async () => {
   console.log('Yield curves calculated and saved')
 }
 
+/**
+ * Calculate the 10 - 2 year yield curve spread from a set of yields over time
+ * @param {Array<Object>} yields 
+ * @returns {Array<Object>}
+ */
 const getYieldCurve_2_10 = yields => {
   const curve_2_10 = []
   for (let a = 0; a < yields.length; a++) {
@@ -72,6 +81,11 @@ const getYieldCurve_2_10 = yields => {
   return curve_2_10
 }
 
+/**
+ * Calculate the 5 - 3 year yield curve spread from a set of yields over time
+ * @param {Array<Object>} yields 
+ * @returns {Array<Object>}
+ */
 const getYieldCurve_3_5 = yields => {
   const curve_3_5 = []
   for (let a = 0; a < yields.length; a++) {
